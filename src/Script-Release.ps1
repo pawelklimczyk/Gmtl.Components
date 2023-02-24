@@ -4,11 +4,11 @@ param (
 	[switch]$major
 )
 
-Write-Host "This scripts increment csproj file version"
+Write-Host "This scripts increment csproj file version and publish nuget package"
 
 $ErrorActionPreference = "Stop"
 
-$mainProjFile = Resolve-Path ".\Gmtl.Serilog\Gmtl.Serilog.csproj"
+$mainProjFile = Resolve-Path ".\Gmtl.Components\Gmtl.Components.csproj"
 $xml = [Xml] (Get-Content $mainProjFile)
 
 #$currentVersion = [Version]($xml.Project.PropertyGroup | ? Condition -Like '' | select -ExpandProperty Version)
@@ -63,11 +63,18 @@ Get-ChildItem -Path .\ -Filter *.csproj -Recurse -File -Name| ForEach-Object {
     }
 }
 
+dotnet publish .\Gmtl.Components\Gmtl.Components.csproj -c Release
+dotnet pack .\Gmtl.Components\Gmtl.Components.csproj -c Release -o publish
+if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+dotnet nuget push .\publish\Gmtl.Components.$($newVersion.Major).$($newVersion.Minor).$($newVersion.Build).nupkg -k 1234 -s http://192.168.180.10:10101/nuget/packages
+if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 
-dotnet pack .\Gmtl.Serilog\Gmtl.Serilog.csproj -c Release -o .\publish
+dotnet publish .\Gmtl.Components.Web\Gmtl.Components.Web.csproj -c Release
+dotnet pack .\Gmtl.Components.Web\Gmtl.Components.Web.csproj -c Release -o publish
 if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
-dotnet nuget push .\publish\Gmtl.Serilog.$($newVersion.Major).$($newVersion.Minor).$($newVersion.Build).nupkg -k 1234 -s http://192.168.180.10:10101/nuget/packages
+dotnet nuget push .\publish\Gmtl.Components.Web.$($newVersion.Major).$($newVersion.Minor).$($newVersion.Build).nupkg -k 1234 -s http://192.168.180.10:10101/nuget/packages
 if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
+
 
 git commit -am "Release v$($newVersion)"
 git tag v$($newVersion)
