@@ -1,9 +1,9 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.4.0</Version>
+    <Version>1.0.5.0</Version>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
-    <Authors>PaweÄ‚â€žĂ„â€¦Ä‚ËĂ˘â€šÂ¬ÄąË‡ Klimczyk</Authors>
+    <Authors>PaweĂ„â€šĂ˘â‚¬ĹľÄ‚â€žĂ˘â‚¬Â¦Ă„â€šĂ‹ÂÄ‚ËĂ˘â‚¬ĹˇĂ‚Â¬Ă„Ä…Ă‹â€ˇ Klimczyk</Authors>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
     <Language>en-US</Language>
     <AssemblyName>Gmtl.Components.Web</AssemblyName>
@@ -15,7 +15,7 @@
     <Description>Web Components</Description>
     <Summary>
     </Summary>
-    <PackageCopyright>PaweÄ‚â€žĂ„â€¦Ä‚ËĂ˘â€šÂ¬ÄąË‡ Klimczyk 2022-2023</PackageCopyright>
+    <PackageCopyright>PaweĂ„â€šĂ˘â‚¬ĹľÄ‚â€žĂ˘â‚¬Â¦Ă„â€šĂ‹ÂÄ‚ËĂ˘â‚¬ĹˇĂ‚Â¬Ă„Ä…Ă‹â€ˇ Klimczyk 2022-2023</PackageCopyright>
     <PackageTags>
     </PackageTags>
     <PackageReleaseNotes>
@@ -25,7 +25,7 @@
     <PackageProjectUrl>
     </PackageProjectUrl>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Copyright>PaweÄ‚â€žĂ„â€¦Ä‚ËĂ˘â€šÂ¬ÄąË‡ Klimczyk, 2022-2023</Copyright>
+    <Copyright>PaweĂ„â€šĂ˘â‚¬ĹľÄ‚â€žĂ˘â‚¬Â¦Ă„â€šĂ‹ÂÄ‚ËĂ˘â‚¬ĹˇĂ‚Â¬Ă„Ä…Ă‹â€ˇ Klimczyk, 2022-2023</Copyright>
     <RepositoryType>git</RepositoryType>
     <Company>GEMOTIAL</Company>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
@@ -35,7 +35,7 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Gmtl.HandyLib" Version="1.0.109" />
+    <PackageReference Include="Gmtl.HandyLib" Version="1.0.115" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="7.0.0" />
     <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="7.0.0" />
   </ItemGroup>
