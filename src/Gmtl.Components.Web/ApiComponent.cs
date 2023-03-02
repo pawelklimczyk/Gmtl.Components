@@ -7,7 +7,7 @@ namespace Gmtl.Components.Web
     {
         public virtual string[] ComponentInfo => throw new NotImplementedException("Implement in inherited class!");
 
-        public string ComponentName => throw new NotImplementedException();
+        public virtual string ComponentName => throw new NotImplementedException();
 
         public virtual OperationResult CheckConfiguration()
         {
