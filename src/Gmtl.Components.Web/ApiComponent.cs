@@ -12,14 +12,14 @@ namespace Gmtl.Components.Web
 
     public abstract class ApiComponent : IApiComponent
     {
-        public string Info => throw new NotImplementedException("Implement in inherited class!");
+        public virtual string Info => throw new NotImplementedException("Implement in inherited class!");
 
-        public OperationResult CheckConfiguration()
+        public virtual OperationResult CheckConfiguration()
         {
             throw new NotImplementedException("Implement in inherited class!");
         }
 
-        public OperationResult HealthCheck()
+        public virtual OperationResult HealthCheck()
         {
             throw new NotImplementedException("Implement in inherited class!");
         }
