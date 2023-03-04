@@ -7,7 +7,7 @@ namespace Gmtl.Components.Web
     {
         public virtual string ComponentName => $"Component {GetType().FullName}";
 
-        public ComponentStatusInfo GetComponentStatusInfo()
+        public virtual ComponentStatusInfo GetComponentStatusInfo()
         {
             throw new NotImplementedException("Implement in inherited class!");
         }
