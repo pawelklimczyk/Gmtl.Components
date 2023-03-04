@@ -16,6 +16,18 @@ namespace Gmtl.Components
         public ComponentStatus Status { get; set; }
         public Dictionary<string, string> ComponentInfo { get; set; }
         public DateTime LastUpdate { get; set; }
+
+        public ComponentStatusInfo MergeOtherInfo(string prefixKey, ComponentStatusInfo childInfo)
+        {
+            if (ComponentInfo == null) { ComponentInfo = new Dictionary<string, string>(); }
+
+            foreach (var kvp in childInfo.ComponentInfo)
+            {
+                ComponentInfo.Add($"{prefixKey}_{kvp.Key}", kvp.Value);
+            }
+
+            return this;
+        }
     }
 
     public enum ComponentStatus
