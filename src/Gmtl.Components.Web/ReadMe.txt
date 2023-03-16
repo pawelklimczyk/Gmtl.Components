@@ -1,0 +1,1 @@
+﻿Use ApiEndpoints.ApiInformationEndpoint to define endpoint name in application
