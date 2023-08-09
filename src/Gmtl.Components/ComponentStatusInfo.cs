@@ -7,11 +7,11 @@ namespace Gmtl.Components
     public class ComponentStatusInfo
     {
         public ComponentStatus Status { get; set; }
-        public Dictionary<string, string> _componentInfo = new Dictionary<string, string>();
-        public ReadOnlyDictionary<string, string> ComponentInfo { get => new ReadOnlyDictionary<string, string>(_componentInfo); }
+        public Dictionary<string, object> _componentInfo = new Dictionary<string, object>();
+        public ReadOnlyDictionary<string, object> ComponentInfo { get => new ReadOnlyDictionary<string, object>(_componentInfo); }
         public DateTime LastUpdate { get; set; }
 
-        public ComponentStatusInfo AddInfo(string key, string value)
+        public ComponentStatusInfo AddInfo(string key, object value)
         {
             if (_componentInfo.ContainsKey(key))
             {
