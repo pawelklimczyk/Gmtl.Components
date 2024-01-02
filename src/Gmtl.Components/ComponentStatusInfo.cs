@@ -6,8 +6,8 @@ namespace Gmtl.Components
 {
     public class ComponentStatusInfo
     {
+        private Dictionary<string, object> _componentInfo = new Dictionary<string, object>();
         public ComponentStatus Status { get; set; }
-        public Dictionary<string, object> _componentInfo = new Dictionary<string, object>();
         public ReadOnlyDictionary<string, object> ComponentInfo { get => new ReadOnlyDictionary<string, object>(_componentInfo); }
         public DateTime LastUpdate { get; set; }
 
