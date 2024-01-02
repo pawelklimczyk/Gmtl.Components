@@ -7,9 +7,11 @@ namespace Gmtl.Components
     public class ComponentStatusInfo
     {
         private Dictionary<string, object> _componentInfo = new Dictionary<string, object>();
+        private Dictionary<string, ComponentStatusInfo> _childComponents = new Dictionary<string, ComponentStatusInfo>();
         public ComponentStatus Status { get; set; }
         public ReadOnlyDictionary<string, object> ComponentInfo { get => new ReadOnlyDictionary<string, object>(_componentInfo); }
-        public DateTime LastUpdate { get; set; }
+        public ReadOnlyDictionary<string, ComponentStatusInfo> ChildComponentsInfo { get => new ReadOnlyDictionary<string, ComponentStatusInfo>(_childComponents); }
+        public DateTime LastUpdate { get; private set; }
 
         public ComponentStatusInfo AddInfo(string key, object value)
         {
@@ -27,12 +29,11 @@ namespace Gmtl.Components
             return this;
         }
 
-        public ComponentStatusInfo MergeOtherInfo(string prefixKey, ComponentStatusInfo childInfo)
+        public ComponentStatusInfo AddChildInfo(string childComponentKey, ComponentStatusInfo childInfo)
         {
-            foreach (var kvp in childInfo._componentInfo)
-            {
-                _componentInfo.Add($"{prefixKey}_{kvp.Key}", kvp.Value);
-            }
+            if (_childComponents.ContainsKey(childComponentKey)) { return this; }
+
+            _childComponents.Add(childComponentKey, childInfo);
 
             LastUpdate = DateTime.Now;
 
