@@ -72,12 +72,6 @@ if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 dotnet pack .\Gmtl.Components.Web\Gmtl.Components.Web.csproj -c Release -o publish
 if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 
-#dotnet nuget push .\publish\Gmtl.Components.$($newVersion.Major).$($newVersion.Minor).$($newVersion.Build).nupkg -k 1234 -s http://192.168.180.10:10101/nuget/packages
-#if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
-
-#dotnet nuget push .\publish\Gmtl.Components.Web.$($newVersion.Major).$($newVersion.Minor).$($newVersion.Build).nupkg -k 1234 -s http://192.168.180.10:10101/nuget/packages
-#if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
-
 dotnet nuget push .\publish\Gmtl.Components.$($newVersion.Major).$($newVersion.Minor).$($newVersion.Build).nupkg -k 12345 -s http://192.168.140.180:10101/api/packages
 if ($LASTEXITCODE -ne 0) { throw "Exit code is $LASTEXITCODE" }
 
