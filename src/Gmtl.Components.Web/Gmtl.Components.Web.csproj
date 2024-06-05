@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <Version>1.0.28.0</Version>
+    <Version>1.0.29.0</Version>
     <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
     <Authors>Gemotial</Authors>
     <RequireLicenseAcceptance>false</RequireLicenseAcceptance>
@@ -13,6 +13,7 @@
     <RootNamespace>Gmtl.Components.Web</RootNamespace>
     <Title>Gmtl.Components.Web</Title>
     <Description>Web Components</Description>
+    <PackageReadmeFile>readme.md</PackageReadmeFile>
     <Summary>
     </Summary>
     <PackageCopyright>Gemotial 2022-2023</PackageCopyright>
@@ -41,5 +42,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Gmtl.Components\Gmtl.Components.csproj" />
+    <None Include="docs\readme.md" Pack="true" PackagePath="" />
   </ItemGroup>
 </Project>
