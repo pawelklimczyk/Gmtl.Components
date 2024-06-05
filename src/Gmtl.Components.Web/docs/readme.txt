@@ -2,7 +2,7 @@
 
 ## Sample
 
-```
+
 public class InfoController : Controller
 {
     private readonly CustomComponent _component;
@@ -44,4 +44,3 @@ public class CustomComponent : ApiComponent
         return statusInfo;
     }
 }
-```
