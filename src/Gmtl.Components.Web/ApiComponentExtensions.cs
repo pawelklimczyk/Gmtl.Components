@@ -11,11 +11,11 @@ namespace Gmtl.Components.Web
         /// Register all types implementing IApiComponent
         /// Except those defined explicitely. Those are registered as 'self'. Useful for 'general' components that use other compoments to build all-in-one statuses
         /// </summary>
-        public static void RegisterAllImplementationsOfIApiComponent(this IServiceCollection services, params Type[] registerAsSelf)
+        public static void RegisterAllImplementationsOfIComponent(this IServiceCollection services, params Type[] registerAsSelf)
         {
             var assembly = Assembly.GetExecutingAssembly();
 
-            var interfaceType = typeof(IApiComponent);
+            var interfaceType = typeof(IComponent);
             var implementations = assembly.GetTypes()
                                           .Where(type => interfaceType.IsAssignableFrom(type) && type.IsClass && !type.IsAbstract && !registerAsSelf.Contains(type));
 
