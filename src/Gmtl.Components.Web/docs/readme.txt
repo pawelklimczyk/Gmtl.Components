@@ -16,11 +16,11 @@ public class InfoController : Controller
     public IActionResult Index() => new HLJsonResult(_component.GetComponentStatusInfo());
 }
 
-public class CustomComponent : ApiComponent
+public class GeneralApiComponent : ApiComponent
 {
     private readonly IEnumerable<IApiComponent> _apiComponents;
 
-    public CustomComponent(IEnumerable<IApiComponent> apiComponents)
+    public GeneralApiComponent(IEnumerable<IApiComponent> apiComponents)
     {
         _apiComponents = apiComponents;
     }
@@ -44,3 +44,7 @@ public class CustomComponent : ApiComponent
         return statusInfo;
     }
 }
+
+In Builder add:
+
+builder.Services.RegisterAllImplementationsOfIApiComponent(typeof(GeneralApiComponent));
