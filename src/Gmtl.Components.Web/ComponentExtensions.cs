@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -38,27 +39,24 @@ namespace Gmtl.Components.Web
         /// Useful if you dont want to scan all assemblies and add every class
         /// use as the last command before var app = builder.Build();
         /// </summary>
-        /// <param name="services"></param>
-        /// <param name="registerAsSelf"></param>
-        public static void RegisterRegiestredImplementationsOfIComponent(this IServiceCollection services, params Type[] registerAsSelf)
+        public static void RegisterIComponentsInfos(this IServiceCollection services, List<Assembly> assembliesToScan, List<Type> registerAsSelf)
         {
             var interfaceType = typeof(IComponent);
+            var components = assembliesToScan.SelectMany(a => a.GetTypes()
+                .Where(t => interfaceType.IsAssignableFrom(t) && t.IsClass && !t.IsAbstract && !registerAsSelf.Any(t2 => t == t2))
+                .ToList()).ToList();
 
-            var implementations = services.Where(type =>
-                type.ImplementationType != null
-                && interfaceType.IsAssignableFrom(type.ImplementationType)
-                && type.ImplementationType.IsClass
-                && !type.ImplementationType.IsAbstract
-                && !registerAsSelf.Contains(type.ImplementationType)).ToList();
-
-            foreach (var implementation in implementations)
+            foreach (var component in components)
             {
-                services.AddTransient(interfaceType, implementation.ImplementationType);
+                if (!services.Any(s => s.ServiceType == interfaceType && s.ImplementationType == component))
+                {
+                    services.AddScoped(interfaceType, component);
+                }
             }
 
-            foreach (var service in registerAsSelf)
+            foreach (var serviceType in registerAsSelf)
             {
-                services.AddTransient(service);
+                services.AddTransient(serviceType);
             }
         }
     }

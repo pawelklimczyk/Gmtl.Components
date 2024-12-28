@@ -35,6 +35,6 @@
     <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Gmtl.HandyLib" Version="1.0.115" />
+    <PackageReference Include="Gmtl.HandyLib" Version="1.0.145" />
   </ItemGroup>
 </Project>
