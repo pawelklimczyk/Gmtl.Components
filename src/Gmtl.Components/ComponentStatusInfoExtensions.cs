@@ -4,7 +4,7 @@ namespace Gmtl.Components
 {
     public static class ComponentStatusInfoExtensions
     {
-        public static ComponentStatusInfo ToCompomentStatusInfo(this OperationResult operationResult)
+        public static ComponentStatusInfo ToComponentStatusInfo(this OperationResult operationResult)
         {
             if (operationResult.IsSuccess)
             {
