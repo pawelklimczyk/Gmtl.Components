@@ -6,14 +6,10 @@ namespace Gmtl.Components
     {
         public static ComponentStatusInfo ToComponentStatusInfo(this OperationResult operationResult)
         {
-            if (operationResult.IsSuccess)
+            return new ComponentStatusInfo
             {
-                return new ComponentStatusInfo { Status = ComponentStatus.Active };
-            }
-            else
-            {
-                return new ComponentStatusInfo { Status = ComponentStatus.Error }.AddInfo("Error", operationResult.Message);
-            }
+                Status = operationResult.IsSuccess ? ComponentStatus.Active : ComponentStatus.Error
+            }.AddInfo("Message", operationResult.Message);
         }
     }
 }
