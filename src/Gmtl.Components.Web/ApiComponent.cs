@@ -38,7 +38,7 @@ namespace Gmtl.Components.Web
             {
                 builder.AppendLine("<table class=\"api-component-info\">");
             }
-            var statusBgColor = "";
+            var statusBgColor = "#ffffff";
             if (status.Status == ComponentStatus.Error) { statusBgColor = "#ff0000"; }
 
             builder.AppendLine($"<tr><td colspan=\"2\" class=\"api-component-info-head\" style=\"background-color:{statusBgColor};\">{status.Status} - {status.LastUpdate:yyyy-MM-dd HH:mm}</td></tr>");
