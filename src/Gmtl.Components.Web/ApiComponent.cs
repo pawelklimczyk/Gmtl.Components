@@ -1,5 +1,6 @@
 ﻿using Gmtl.HandyLib.Operations;
 using System;
+using System.ComponentModel;
 using System.Text;
 
 namespace Gmtl.Components.Web
@@ -30,30 +31,36 @@ namespace Gmtl.Components.Web
             return AsHtmlInternal(status, isInternalHtml);
         }
 
-        private string AsHtmlInternal(ComponentStatusInfo status, bool isInternalHtml = false)
+        private string AsHtmlInternal(ComponentStatusInfo status, bool isInternalHtml = false, string componentName = "Main")
         {
             var builder = new StringBuilder();
+            var cssKey = string.Empty;
 
             if (!isInternalHtml)
             {
                 builder.AppendLine("<table class=\"api-component-info\">");
+                cssKey = "head";
             }
+            else
+            {
+                cssKey = "child";
+            }
+
             var statusBgColor = "#ffffff";
             if (status.Status == ComponentStatus.Error) { statusBgColor = "#ff0000"; }
 
-            builder.AppendLine($"<tr><td colspan=\"2\" class=\"api-component-info-head\" style=\"background-color:{statusBgColor};\">{status.Status} - {status.LastUpdate:yyyy-MM-dd HH:mm}</td></tr>");
+            builder.AppendLine($"<tr><td colspan=\"2\" class=\"api-component-info-{cssKey}\" style=\"background-color:{statusBgColor};\">{componentName}<br />{status.Status} - {status.LastUpdate:yyyy-MM-dd HH:mm}</td></tr>");
 
             foreach (var info in status.ComponentInfo)
             {
-                builder.AppendLine($"<tr><td>{info.Key}</td><td>{info.Value}</td></tr>");
+                builder.AppendLine($"<tr><td class=\"api-component-info-{cssKey}-item\">{info.Key}</td><td>{info.Value}</td></tr>");
             }
 
             if (status.ChildComponentsInfo?.Count > 0)
             {
                 foreach (var component in status.ChildComponentsInfo)
                 {
-                    builder.AppendLine($"<tr><td colspan=\"2\" class=\"api-component-info-child\">{component.Key}</td></tr>");
-                    builder.AppendLine(AsHtmlInternal(component.Value, true));
+                    builder.AppendLine(AsHtmlInternal(component.Value, true, component.Key));
                 }
             }
 
