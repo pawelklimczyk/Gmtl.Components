@@ -1,6 +1,7 @@
 ﻿using Gmtl.HandyLib.Operations;
 using System;
-using System.ComponentModel;
+using System.Collections;
+using System.Linq;
 using System.Text;
 
 namespace Gmtl.Components.Web
@@ -53,7 +54,7 @@ namespace Gmtl.Components.Web
 
             foreach (var info in status.ComponentInfo)
             {
-                builder.AppendLine($"<tr><td class=\"api-component-info-{cssKey}-item\">{info.Key}</td><td>{info.Value}</td></tr>");
+                builder.AppendLine($"<tr><td class=\"api-component-info-{cssKey}-item\">{info.Key}</td><td>{FormatValueWithHtml(info.Value)}</td></tr>");
             }
 
             if (status.ChildComponentsInfo?.Count > 0)
@@ -67,6 +68,29 @@ namespace Gmtl.Components.Web
             if (!isInternalHtml)
             {
                 builder.AppendLine("</table>");
+            }
+
+            return builder.ToString();
+        }
+
+        protected string FormatValueWithHtml(object value)
+        {
+            if (value == null) return string.Empty;
+
+            var builder = new StringBuilder();
+
+            if (value is string str)
+            {
+                builder.Append(str);
+            }
+            else if (value is IEnumerable enumerable)
+            {
+                var items = enumerable.Cast<object>().Select(o => FormatValueWithHtml(o).ToString());
+                builder.Append(string.Join("<br />", items));
+            }
+            else
+            {
+                builder.Append(value?.ToString());
             }
 
             return builder.ToString();
