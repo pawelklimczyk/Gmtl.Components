@@ -31,7 +31,7 @@ namespace Gmtl.Components
                 return null;
             }
         }
-        public DateTime LastUpdate { get; private set; }
+        public DateTime LastUpdate { get; private set; } = DateTime.Now;
 
         public ComponentStatusInfo AddInfo(string key, object value)
         {
