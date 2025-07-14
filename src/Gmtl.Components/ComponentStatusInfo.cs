@@ -6,18 +6,15 @@ namespace Gmtl.Components
 {
     public class ComponentStatusInfo
     {
-        private Dictionary<string, object> _componentInfo = new Dictionary<string, object>();
-        private Dictionary<string, ComponentStatusInfo> _childComponents = new Dictionary<string, ComponentStatusInfo>();
+        private readonly Dictionary<string, object> _componentInfo = new Dictionary<string, object>();
+        private readonly Dictionary<string, ComponentStatusInfo> _childComponents = new Dictionary<string, ComponentStatusInfo>();
         public ComponentStatus Status { get; set; }
 
         public ReadOnlyDictionary<string, object> ComponentInfo
         {
             get
             {
-                if (_componentInfo != null && _componentInfo.Count > 0)
-                    return new ReadOnlyDictionary<string, object>(_componentInfo);
-
-                return null;
+                return new ReadOnlyDictionary<string, object>(_componentInfo);
             }
         }
 
@@ -25,12 +22,10 @@ namespace Gmtl.Components
         {
             get
             {
-                if (_childComponents != null && _childComponents.Count > 0)
-                    return new ReadOnlyDictionary<string, ComponentStatusInfo>(_childComponents);
-
-                return null;
+                return new ReadOnlyDictionary<string, ComponentStatusInfo>(_childComponents);
             }
         }
+
         public DateTime LastUpdate { get; private set; } = DateTime.Now;
 
         public ComponentStatusInfo AddInfo(string key, object value)
